@@ -7,7 +7,10 @@ module Coverband
                   :reporter, :redis_namespace, :redis_ttl,
                   :background_reporting_enabled,
                   :background_reporting_sleep_seconds, :test_env,
-                  :web_enable_clear, :gem_details, :web_debug, :report_on_exit
+                  :web_enable_clear, :gem_details, :web_debug, :report_on_exit,
+                  :http_store_save_coverage_method, :http_store_save_coverage_url, :http_store_save_coverage_timeout
+                  :http_store_get_coverage_method, :http_store_get_coverage_url, :http_store_get_coverage_timeout,
+                  :http_store_metadata_provider
 
     attr_writer :logger, :s3_region, :s3_bucket, :s3_access_key_id, :s3_secret_access_key
     attr_reader :track_gems, :ignore, :use_oneshot_lines_coverage
@@ -60,6 +63,14 @@ module Coverband
       @s3_secret_access_key = nil
       @redis_namespace = nil
       @redis_ttl = nil
+
+      @http_store_save_coverage_method = :post
+      @http_store_save_coverage_url = nil
+      @http_store_save_coverage_timeout = 10
+      @http_store_get_coverage_method = :get
+      @http_store_get_coverage_url = nil
+      @http_store_get_coverage_timeout = 10
+      @http_store_metadata_provider = nil
     end
 
     def logger
